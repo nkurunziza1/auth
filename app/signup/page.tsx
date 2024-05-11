@@ -1,23 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Field, Form, Formik } from "formik";
-import { loginSchema, signupSchema } from "@/app/_validations/auth.validation";
-import { handleLogin, handleSignup } from "@/app/_api/login";
+import { signupSchema } from "@/app/_validations/auth.validation";
+import { handleSignup } from "@/app/_api/login";
 
-interface SignupType {
-  setHidingSignup: React.Dispatch<React.SetStateAction<boolean>>;
-  hideSignup: boolean;
-}
-
-const Signup = ({ setHidingSignup, hideSignup }: SignupType) => {
+const Signup = () => {
   const [loading, setLoading] = useState(false);
 
   return (
     <div>
       <div
-        className={`relative ${
-          hideSignup ? "hidden" : ""
-        }  flex min-h-screen items-center justify-center bg-[url(/assets/images/auth.jpeg)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16`}
+        className={`relative   flex min-h-screen items-center justify-center bg-[url(/assets/images/auth.jpeg)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16`}
       >
         <div className="relative w-full max-w-[870px] rounded-md bg-white">
           <div className="relative flex flex-col justify-center rounded-md  px-6 py-20 backdrop-blur-lg dark:bg-black/50 lg:min-h-[758px]">
@@ -40,13 +33,10 @@ const Signup = ({ setHidingSignup, hideSignup }: SignupType) => {
                 onSubmit={async (values, { setSubmitting }) => {
                   try {
                     const response = await handleSignup(setLoading, values);
-                    setHidingSignup(true);
                   } catch (error) {
                     console.log("error", error);
-                    setHidingSignup(true);
                   } finally {
                     setSubmitting(false);
-                    setHidingSignup(true);
                   }
                 }}
               >

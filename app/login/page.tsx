@@ -5,20 +5,16 @@ import { loginSchema } from "@/app/_validations/auth.validation";
 import { handleLogin } from "@/app/_api/login";
 
 
-interface LoginType{
-hideLogin: boolean
-showSignup: () => void
-setHidingLogin: React.Dispatch<React.SetStateAction<boolean>>
-}
-const Login = ({hideLogin, setHidingLogin, showSignup}:LoginType) => {
+
+
+const Login = () => {
   const [loading, setLoading] = useState(false);
 
   return (
     <div>
       <div
-        className={`relative ${
-          hideLogin ? "hidden" : ""
-        }  flex min-h-screen items-center justify-center bg-[url(/assets/images/auth.jpeg)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16`}
+        className={`relative 
+         flex min-h-screen items-center justify-center bg-[url(/assets/images/auth.jpeg)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16`}
       >
         <div className="relative w-full max-w-[870px] rounded-md bg-white">
           <div className="relative flex flex-col justify-center rounded-md  px-6 py-20 backdrop-blur-lg dark:bg-black/50 lg:min-h-[758px]">
@@ -40,8 +36,6 @@ const Login = ({hideLogin, setHidingLogin, showSignup}:LoginType) => {
                 onSubmit={async (values, { setSubmitting }) => {
                   try {
                     const response = await handleLogin(setLoading, values);
-                    setHidingLogin(true);
-                    
                   } catch (error) {
                     console.log("error", error);
                   } finally {
@@ -120,7 +114,7 @@ const Login = ({hideLogin, setHidingLogin, showSignup}:LoginType) => {
                     >
                       {loading ? "Logging in..." : "  Sign in"}
                     </button>
-                    <p>Don't have an account register <span className="text-primary" onClick={showSignup}>here</span></p>
+                    <p>Don't have an account register <span className="text-primary">here</span></p>
                   </Form>
                 )}
               </Formik>
